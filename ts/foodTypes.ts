@@ -1,4 +1,4 @@
-enum CategoryType {
+export enum CategoryType {
   BREAKFAST = 'breakfast',
   MAIN = 'main'
 }
@@ -9,7 +9,7 @@ export interface Food {
     name: string,
     calories: number,
     proteins: number,
-    portionSize: number,
+    portionSize: string,
     portionCalories: number,
     portionProteins: number,
     category: CategoryType,
