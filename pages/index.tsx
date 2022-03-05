@@ -3,10 +3,15 @@ import { useFetchFoods } from '../hooks/foods'
 import FoodTable from '../components/FoodTable'
 import NavBar from '../components/NavBar'
 import SearchInput from '../components/SearchInput'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { CategoryType, Food } from '../ts/foodTypes'
+import MealDetailsButton from '../components/MealDetailsButton'
+import ClearMealButton from '../components/ClearMealButton'
+import { GlobalContext } from '../providers/GlobalContextProvider'
 
 const Home: NextPage = () => {
+  const { selectedMeal, setSelectedMeal } = useContext(GlobalContext);
+  console.log({ selectedMeal })
   const { data: foods } = useFetchFoods()
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>(CategoryType.MAIN)
   const [searchText, setSearchText] = useState('')
@@ -39,6 +44,12 @@ const Home: NextPage = () => {
         />
       </div>
       {filteredFoods && <FoodTable foods={filteredFoods} handleFoodSelected={handleFoodSelected} selectedFoods={selectedFoods} />}
+      {selectedFoods?.length > 0 && (
+        <>
+          <MealDetailsButton selectedFoods={selectedFoods} setSelectedMeal={setSelectedMeal} />
+          <ClearMealButton clearMeal={() => setSelectedFoods([])} />
+        </>
+      )}
     </div>
   )
 }
