@@ -10,8 +10,6 @@ export interface Food {
     calories: number,
     proteins: number,
     portionSize: string,
-    portionCalories: number,
-    portionProteins: number,
     category: CategoryType,
     isBase?: boolean
   }

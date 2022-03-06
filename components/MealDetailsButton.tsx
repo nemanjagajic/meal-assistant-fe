@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Food } from '../ts/foodTypes'
 import { useRouter } from 'next/router'
+import { calculateValueByPortionSize } from '../utils'
 
 type MealDetailsButtonProps = {
   selectedFoods: Array<Food>,
@@ -20,10 +21,14 @@ const MealDetailsButton: FC<MealDetailsButtonProps> = ({ selectedFoods, setSelec
     >
       <div className='flex flex-row items-center justify-center cursor-pointer'>
         <p className='text-gray-200 mr-1 text-lg font-light'>
-          {`${selectedFoods.reduce((prevValue, food) => prevValue + food.attributes.portionCalories, 0)}kcal,`}
+          {`${selectedFoods.reduce((prevValue, food) => {
+            return prevValue + calculateValueByPortionSize(food.attributes.calories, Number.parseInt(food.attributes.portionSize))
+          }, 0).toFixed(0)}kcal,`}
         </p>
         <p className='text-gray-200 text-lg font-light'>
-          {`${selectedFoods.reduce((prevValue, food) => prevValue + food.attributes.portionProteins, 0)}p`}
+          {`${selectedFoods.reduce((prevValue, food) => {
+            return prevValue + calculateValueByPortionSize(food.attributes.proteins, Number.parseInt(food.attributes.portionSize))
+          }, 0).toFixed(1)}p`}
         </p>
       </div>
       <div className='flex flex-row items-center justify-center cursor-pointer'>

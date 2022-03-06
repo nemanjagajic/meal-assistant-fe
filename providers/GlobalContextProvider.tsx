@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, createContext } from 'react'
 import { Food } from '../ts/foodTypes'
 
-export const GlobalContext = React.createContext({
+export const GlobalContext = createContext({
   selectedMeal: [] as Array<Food>,
-  setSelectedMeal: () => {}
+  setSelectedMeal: (foods: Array<Food>) => {}
 })
 
 type GlobalContextProviderProps = {
@@ -16,7 +16,6 @@ const GlobalContextProvider: FC<GlobalContextProviderProps> = ({ children }) => 
   return (
     <GlobalContext.Provider value={{
       selectedMeal,
-      // @ts-ignore
       setSelectedMeal
     }}>
       {children}

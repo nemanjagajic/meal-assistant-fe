@@ -11,7 +11,6 @@ import { GlobalContext } from '../providers/GlobalContextProvider'
 
 const Home: NextPage = () => {
   const { selectedMeal, setSelectedMeal } = useContext(GlobalContext);
-  console.log({ selectedMeal })
   const { data: foods } = useFetchFoods()
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>(CategoryType.MAIN)
   const [searchText, setSearchText] = useState('')

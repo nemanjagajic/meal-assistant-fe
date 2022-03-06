@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Food } from '../ts/foodTypes'
+import { calculateValueByPortionSize } from '../utils'
 
 const columnTitles = ['name', 'size', 'kcal', 'p']
 
@@ -39,10 +40,10 @@ const FoodTable: FC<FoodTableProps> = ({ foods = [], handleFoodSelected, selecte
                     {food.attributes.portionSize}
                   </td>
                   <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                    {food.attributes.portionCalories}
+                    {calculateValueByPortionSize(food.attributes.calories, Number.parseInt(food.attributes.portionSize)).toFixed(0)}
                   </td>
                   <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                    {food.attributes.portionProteins}
+                    {calculateValueByPortionSize(food.attributes.proteins, Number.parseInt(food.attributes.portionSize)).toFixed(1)}
                   </td>
                 </tr>
               ))}
