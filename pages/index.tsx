@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useFetchFoods } from '../hooks/foods'
 import FoodTable from '../components/FoodTable'
-import NavBar from '../components/NavBar'
+import NavBar, { TAB } from '../components/NavBar'
 import SearchInput from '../components/SearchInput'
 import { useContext, useState } from 'react'
 import { CategoryType, Food } from '../ts/foodTypes'
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <div className='sticky top-0'>
-        <NavBar />
+        <NavBar activeTab={TAB.HOME} />
         <SearchInput
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}

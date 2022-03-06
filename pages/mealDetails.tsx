@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import NavBar from '../components/NavBar'
+import NavBar, { TAB } from '../components/NavBar'
 import { GlobalContext } from '../providers/GlobalContextProvider'
 import { calculateValueByPortionSize } from '../utils'
 
@@ -51,7 +51,7 @@ const MealDetails = () => {
   return (
     <div>
       <div className='sticky top-0'>
-        <NavBar />
+        <NavBar activeTab={TAB.HOME} />
         {selectedMeal?.length > 1 && (
           <div className='w-full text-center p-4 bg-gray-200 text-gray-600'>
             Ukupno: <span className='font-bold'>{calculateSum(FoodField.CALORIES)}</span> kcal,

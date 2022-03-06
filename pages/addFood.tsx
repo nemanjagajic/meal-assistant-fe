@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import NavBar from '../components/NavBar'
+import NavBar, { TAB } from '../components/NavBar'
 import { CategoryType } from '../ts/foodTypes'
 import Switch from 'react-switch'
 import { useAddFood } from '../hooks/foods'
@@ -35,7 +35,7 @@ const AddFood: FC = () => {
   return (
     <div>
       <div className='sticky top-0'>
-        <NavBar />
+        <NavBar activeTab={TAB.ADD_FOOD} />
       </div>
       <div className='flex flex-col w-4/5 md:w-1/2 m-auto mt-8'>
         <input
