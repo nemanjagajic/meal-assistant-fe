@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Food } from '../ts/foodTypes'
-import { calculateValueByPortionSize } from '../utils'
+import { calculateValueByPortionSize, limitText } from '../utils'
 
 const columnTitles = ['name', 'size', 'kcal', 'p']
 
@@ -33,8 +33,8 @@ const FoodTable: FC<FoodTableProps> = ({ foods = [], handleFoodSelected, selecte
                   onClick={e => handleFoodSelected(e.target?.parentNode?.id)} id={food.id.toString()} key={food.id}
                   className={`${selectedFoods.find(f => f.id == food.id) ? 'bg-teal-100' : 'bg-white'} border-b cursor-pointer`}
                 >
-                  <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap font-bold text-gray-500'>
-                    {food.attributes.name}
+                  <td className='text-sm text-gray-900 font-light pl-6 py-4 whitespace-nowrap font-bold text-gray-500'>
+                    {limitText(food.attributes.name, window.innerWidth < 400 ? 14 : 50)}
                   </td>
                   <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
                     {food.attributes.portionSize}

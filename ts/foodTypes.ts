@@ -14,3 +14,14 @@ export interface Food {
     isBase?: boolean
   }
 }
+
+export type CreateFoodRequest = {
+  data: {
+    name: string,
+    calories: number,
+    proteins: number,
+    category: CategoryType,
+    isBase?: boolean,
+    portionSize: string
+  }
+}

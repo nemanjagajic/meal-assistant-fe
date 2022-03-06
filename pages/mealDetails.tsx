@@ -51,33 +51,35 @@ const MealDetails = () => {
   return (
     <div>
       <div className='sticky top-0'>
-        <div className='sticky top-0'>
-          <NavBar />
-        </div>
-        <div className='flex flex-col items-center mt-12'>
-          {selectedMeal.map(food => {
-            const portionSize = portionSizes.find(ps => ps.id === food.id)
-            if (!portionSize) return null
+        <NavBar />
+      </div>
+      <div className='flex flex-col items-center mt-8'>
+        {selectedMeal.map(food => {
+          const portionSize = portionSizes.find(ps => ps.id === food.id)
+          if (!portionSize) return null
 
-            return (
-              <div key={food.id} className='flex flex-col md:flex-row justify-center items-center mb-6 p-4 border-b'>
-                <p className='flex items-center justify-center w-52 text-gray-600 mb-4 md:justify-start md:mb-0'>{food.attributes.name}</p>
-                <input
-                  className='border p-2 rounded-xl focus:outline-none'
-                  value={portionSize.size || 0}
-                  onChange={e => handleInputChange(food.id, Number.parseInt(e.target.value))}
-                />
-                <p className='flex justify-center items-center w-24 h-12 p-2 bg-gray-100 rounded-xl m-4'>
-                  {`${calculateValueByPortionSize(food.attributes.calories, portionSize.size).toFixed(0)} kcal`}
-                </p>
-                <p className='flex justify-center items-center w-24 h-12 p-2 bg-gray-100 rounded-xl'>
-                  {`${calculateValueByPortionSize(food.attributes.proteins, portionSize.size).toFixed(1)} p`}
-                </p>
-              </div>
-            )
-          })}
-          <div className='text-lg mt-4 mb-8'>{`Ukupno: ${calculateSum(FoodField.CALORIES)} kcal, ${calculateSum(FoodField.PROTEINS)} p`}</div>
-        </div>
+          return (
+            <div key={food.id} className='flex flex-col md:flex-row justify-center items-center mb-6 p-4 border-b'>
+              <p className='flex items-center justify-center w-52 text-gray-600 mb-4 md:justify-start md:mb-0'>{food.attributes.name}</p>
+              <input
+                className='border p-2 rounded-xl focus:outline-none'
+                value={portionSize.size || 0}
+                onChange={e => handleInputChange(food.id, Number.parseInt(e.target.value))}
+              />
+              <p className='flex justify-center items-center w-24 h-12 p-2 bg-gray-100 rounded-xl m-4'>
+                {`${calculateValueByPortionSize(food.attributes.calories, portionSize.size).toFixed(0)} kcal`}
+              </p>
+              <p className='flex justify-center items-center w-24 h-12 p-2 bg-gray-100 rounded-xl'>
+                {`${calculateValueByPortionSize(food.attributes.proteins, portionSize.size).toFixed(1)} p`}
+              </p>
+            </div>
+          )
+        })}
+        {selectedMeal?.length > 0 && (
+          <p className='text-lg mt-4 mb-8'>
+            {`Ukupno: ${calculateSum(FoodField.CALORIES)} kcal, ${calculateSum(FoodField.PROTEINS)} p`}
+          </p>
+        )}
       </div>
     </div>
   )

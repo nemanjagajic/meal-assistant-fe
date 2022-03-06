@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query'
-import { Food } from '../ts/foodTypes'
-import { getFoods } from '../services/api/foods'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { CreateFoodRequest, Food } from '../ts/foodTypes'
+import { createFood, getFoods } from '../services/api/foods'
 
 export const useFetchFoods = () => {
   const { data, error, isLoading, isFetching } = useQuery<Array<Food>>(
@@ -8,4 +8,19 @@ export const useFetchFoods = () => {
     getFoods
   )
   return { data, error, isLoading, isFetching }
+}
+
+export const useAddFood = (callbackSuccessFn?: () => void) => {
+  const queryClient = useQueryClient();
+  
+  const { mutate, isLoading } = useMutation<Food, unknown, CreateFoodRequest>(
+    createFood,
+    {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries('foods');
+        callbackSuccessFn?.()
+      }
+    }
+  )
+  return { mutate, isLoading }
 }
