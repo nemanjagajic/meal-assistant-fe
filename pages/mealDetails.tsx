@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { GlobalContext } from '../providers/GlobalContextProvider'
 import { calculateValueByPortionSize } from '../utils'
@@ -52,8 +52,14 @@ const MealDetails = () => {
     <div>
       <div className='sticky top-0'>
         <NavBar />
+        {selectedMeal?.length > 1 && (
+          <div className='w-full text-center p-4 bg-gray-200 text-gray-600'>
+            Ukupno: <span className='font-bold'>{calculateSum(FoodField.CALORIES)}</span> kcal,
+            <span className='font-bold'> {calculateSum(FoodField.PROTEINS)}</span> p
+          </div>
+        )}
       </div>
-      <div className='flex flex-col items-center mt-8'>
+      <div className='flex flex-col items-center mt-2'>
         {selectedMeal.map(food => {
           const portionSize = portionSizes.find(ps => ps.id === food.id)
           if (!portionSize) return null
@@ -75,11 +81,6 @@ const MealDetails = () => {
             </div>
           )
         })}
-        {selectedMeal?.length > 0 && (
-          <p className='text-lg mt-4 mb-8'>
-            {`Ukupno: ${calculateSum(FoodField.CALORIES)} kcal, ${calculateSum(FoodField.PROTEINS)} p`}
-          </p>
-        )}
       </div>
     </div>
   )

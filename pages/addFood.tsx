@@ -65,7 +65,7 @@ const AddFood: FC = () => {
         />
         <select
           name='category'
-          className='border p-2 rounded-xl focus:outline-none mb-4 appearance-none'
+          className='border p-2 rounded-xl focus:outline-none mb-4 appearance-none cursor-pointer'
           // @ts-ignore
           onChange={e => setCategory(e.target.value)}
           value={category}
