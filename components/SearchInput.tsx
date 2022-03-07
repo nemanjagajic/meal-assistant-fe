@@ -25,13 +25,13 @@ const SearchInput: FC<SearchInputProps> = (
           className='flex items-center justify-center px-4 border-l'
           onClick={() => setCategoryAndClearInput(CategoryType.BREAKFAST)}
         >
-          <div className={`text-${selectedCategory === CategoryType.BREAKFAST ? 'teal-600' : 'stone-400'} font-bold`}>B</div>
+          <div className={`${selectedCategory === CategoryType.BREAKFAST ? 'text-teal-600' : 'text-stone-400'} font-bold`}>B</div>
         </button>
         <button
           className='flex items-center justify-center px-4 border-l'
           onClick={() => setCategoryAndClearInput(CategoryType.MAIN)}
         >
-          <div className={`text-${selectedCategory === CategoryType.MAIN ? 'teal-600' : 'stone-400'} font-bold`}>M</div>
+          <div className={`${selectedCategory === CategoryType.MAIN ? 'text-teal-600' : 'text-stone-400'} font-bold`}>M</div>
         </button>
       </div>
     </div>
