@@ -18,9 +18,13 @@ const Home: NextPage = () => {
 
   const filteredFoods = foods?.filter(
     food => food.attributes.name.toLowerCase().includes(searchText.toLowerCase()) && food.attributes.category === selectedCategory
-  )
+  ).sort((f1, f2) => {
+    if (selectedFoods.find(f => f.id === f1.id) && !selectedFoods.find(f => f.id === f2.id)) return -1
+    return 1
+  })
 
   const handleFoodSelected = (foodId: string) => {
+    setSearchText('')
     const isAlreadySelected = selectedFoods.find(food => food.id.toString() === foodId)
     if (isAlreadySelected) {
       setSelectedFoods(selectedFoods.filter(food => food.id.toString() !== foodId))
